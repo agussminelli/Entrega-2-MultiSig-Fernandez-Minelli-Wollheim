@@ -1,0 +1,492 @@
+:root {
+  --bg: #0b1020;
+  --surface: #151a2e;
+  --border: #2a3050;
+  --text: #e6e9f5;
+  --muted: #8892b0;
+  --accent: #5b8def;
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+}
+
+.app {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 2rem 1.25rem 4rem;
+}
+
+.app-header {
+  margin-bottom: 2rem;
+}
+
+.app-header h1 {
+  margin: 0;
+  font-size: 1.75rem;
+}
+
+.subtitle {
+  color: var(--muted);
+  margin: 0.25rem 0 0;
+}
+
+.connect-gate {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  padding: 4rem 1rem;
+}
+
+/* Estilos generales para paneles */
+section.contract-info-panel,
+section.new-proposal-form,
+section.proposals-panel,
+section.account-panel {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+section h2 {
+  margin: 0 0 1rem;
+  font-size: 1.1rem;
+  color: var(--accent);
+}
+
+/* Contract Info Panel */
+.contract-info-panel .info-block {
+  margin-bottom: 1.5rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.contract-info-panel .info-block:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.contract-info-panel label {
+  display: block;
+  color: var(--muted);
+  font-size: 0.9rem;
+  margin-bottom: 0.5rem;
+}
+
+.contract-address {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: rgba(91, 141, 239, 0.1);
+  padding: 0.75rem;
+  border-radius: 6px;
+  border: 1px solid var(--border);
+}
+
+.contract-address code {
+  flex: 1;
+  font-size: 0.85rem;
+  word-break: break-all;
+}
+
+.contract-address button {
+  padding: 0.25rem 0.5rem;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: transform 0.2s;
+}
+
+.contract-address button:hover {
+  transform: scale(1.2);
+}
+
+.threshold-value {
+  font-size: 1.3rem;
+  color: var(--accent);
+}
+
+.signers-list {
+  background: rgba(91, 141, 239, 0.05);
+  padding: 1rem;
+  border-radius: 6px;
+  border: 1px solid var(--border);
+}
+
+.signers-list ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.signers-list li {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.signers-list li:last-child {
+  margin-bottom: 0;
+}
+
+.signer-number {
+  color: var(--muted);
+  font-size: 0.9rem;
+  min-width: 30px;
+}
+
+.signers-list code {
+  flex: 1;
+  font-size: 0.85rem;
+  padding: 0.25rem 0.5rem;
+  background: rgba(91, 141, 239, 0.1);
+  border-radius: 4px;
+}
+
+.signers-list button {
+  padding: 0.25rem 0.5rem;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  font-size: 0.9rem;
+}
+
+.not-signer-message {
+  background: rgba(239, 68, 68, 0.1);
+  border: 1px solid #ef4444;
+  color: #fca5a5;
+  padding: 1rem;
+  border-radius: 6px;
+  text-align: center;
+  margin: 1rem 0;
+}
+
+/* New Proposal Form */
+.new-proposal-form form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.form-group label {
+  color: var(--muted);
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+.form-group input {
+  padding: 0.75rem;
+  background: #1b2140;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  color: var(--text);
+  font-size: 0.95rem;
+  font-family: inherit;
+}
+
+.form-group input:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 2px rgba(91, 141, 239, 0.2);
+}
+
+.form-group input:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.form-group small {
+  color: var(--muted);
+  font-size: 0.85rem;
+}
+
+.error-message {
+  background: rgba(239, 68, 68, 0.1);
+  border: 1px solid #ef4444;
+  color: #fca5a5;
+  padding: 0.75rem;
+  border-radius: 6px;
+  font-size: 0.9rem;
+}
+
+.success-message {
+  background: rgba(34, 197, 94, 0.1);
+  border: 1px solid #22c55e;
+  color: #86efac;
+  padding: 0.75rem;
+  border-radius: 6px;
+  font-size: 0.9rem;
+}
+
+.new-proposal-form button,
+.account-panel button {
+  padding: 0.75rem 1.5rem;
+  background: var(--accent);
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.new-proposal-form button:hover:not(:disabled),
+.account-panel button:hover:not(:disabled) {
+  background: #4a7dd4;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(91, 141, 239, 0.3);
+}
+
+.new-proposal-form button:disabled,
+.account-panel button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* Account Panel */
+.account-panel {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Proposals Panel */
+.proposals-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.proposal-card {
+  background: #1b2140;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 1rem;
+  transition: all 0.2s;
+}
+
+.proposal-card:hover {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 1px rgba(91, 141, 239, 0.2);
+}
+
+.proposal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.proposal-id {
+  font-weight: 600;
+  color: var(--accent);
+  font-size: 1.1rem;
+}
+
+.status {
+  padding: 0.25rem 0.75rem;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  font-weight: 500;
+}
+
+.status.pendiente {
+  background: rgba(234, 179, 8, 0.2);
+  color: #fef08a;
+}
+
+.status.ejecutada {
+  background: rgba(34, 197, 94, 0.2);
+  color: #86efac;
+}
+
+.status.cancelada {
+  background: rgba(239, 68, 68, 0.2);
+  color: #fca5a5;
+}
+
+.proposal-details {
+  margin-bottom: 1rem;
+}
+
+.detail-row {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.5rem 0;
+  font-size: 0.9rem;
+}
+
+.detail-row .label {
+  color: var(--muted);
+  min-width: 120px;
+}
+
+.detail-row code {
+  background: rgba(91, 141, 239, 0.1);
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  font-size: 0.85rem;
+}
+
+.detail-row code.calldata {
+  word-break: break-all;
+  max-width: 300px;
+}
+
+.approvals {
+  font-weight: 600;
+  color: var(--accent);
+}
+
+.progress-bar {
+  flex: 1;
+  height: 4px;
+  background: rgba(91, 141, 239, 0.2);
+  border-radius: 2px;
+  overflow: hidden;
+  margin-left: 0.5rem;
+}
+
+.progress-fill {
+  height: 100%;
+  background: var(--accent);
+  transition: width 0.3s ease;
+}
+
+.proposal-actions {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.proposal-actions button {
+  padding: 0.5rem 1rem;
+  border: 1px solid;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.btn-approve {
+  background: rgba(34, 197, 94, 0.1);
+  border-color: #22c55e;
+  color: #86efac;
+}
+
+.btn-approve:hover:not(:disabled) {
+  background: rgba(34, 197, 94, 0.2);
+  box-shadow: 0 0 8px rgba(34, 197, 94, 0.3);
+}
+
+.btn-approve:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.btn-execute {
+  background: rgba(59, 130, 246, 0.1);
+  border-color: #3b82f6;
+  color: #93c5fd;
+}
+
+.btn-execute:hover:not(:disabled) {
+  background: rgba(59, 130, 246, 0.2);
+  box-shadow: 0 0 8px rgba(59, 130, 246, 0.3);
+}
+
+.btn-execute:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.btn-cancel {
+  background: rgba(239, 68, 68, 0.1);
+  border-color: #ef4444;
+  color: #fca5a5;
+}
+
+.btn-cancel:hover:not(:disabled) {
+  background: rgba(239, 68, 68, 0.2);
+  box-shadow: 0 0 8px rgba(239, 68, 68, 0.3);
+}
+
+.btn-cancel:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.no-actions {
+  color: var(--muted);
+  font-size: 0.85rem;
+  font-style: italic;
+}
+
+.loading {
+  text-align: center;
+  color: var(--muted);
+  padding: 2rem 1rem;
+}
+
+.no-proposals,
+.no-data {
+  text-align: center;
+  color: var(--muted);
+  padding: 1.5rem;
+}
+
+/* Responsive */
+@media (max-width: 640px) {
+  section.contract-info-panel,
+  section.new-proposal-form,
+  section.proposals-panel,
+  section.account-panel {
+    padding: 1rem;
+  }
+
+  .proposal-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+
+  .proposal-actions {
+    width: 100%;
+  }
+
+  .proposal-actions button {
+    flex: 1;
+  }
+
+  .account-panel {
+    flex-direction: column;
+    gap: 1rem;
+    text-align: center;
+  }
+}
