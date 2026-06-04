@@ -1,0 +1,49 @@
+{
+  "_format": "hh3-sol-build-info-1",
+  "id": "solc-0_8_28-4d654f61ac5019c8bf244cba0d227b1a7e0a5c81",
+  "solcVersion": "0.8.28",
+  "solcLongVersion": "0.8.28+commit.7893614a",
+  "compilerType": "solc",
+  "toolVersions": {
+    "hardhat": "3.7.0"
+  },
+  "userSourceNameMap": {
+    "contracts/multisig.sol": "project/contracts/multisig.sol"
+  },
+  "input": {
+    "language": "Solidity",
+    "settings": {
+      "evmVersion": "cancun",
+      "optimizer": {
+        "enabled": true,
+        "runs": 200
+      },
+      "outputSelection": {
+        "*": {
+          "": [
+            "ast"
+          ],
+          "*": [
+            "abi",
+            "evm.bytecode.linkReferences",
+            "evm.bytecode.object",
+            "evm.bytecode.opcodes",
+            "evm.bytecode.sourceMap",
+            "evm.deployedBytecode.immutableReferences",
+            "evm.deployedBytecode.linkReferences",
+            "evm.deployedBytecode.object",
+            "evm.deployedBytecode.opcodes",
+            "evm.deployedBytecode.sourceMap",
+            "evm.methodIdentifiers"
+          ]
+        }
+      },
+      "remappings": []
+    },
+    "sources": {
+      "project/contracts/multisig.sol": {
+        "content": "// SPDX-License-Identifier: MIT\r\npragma solidity ^0.8.20;\r\n\r\ncontract MultiSig {\r\n\r\n    address[] public signers;\r\n    uint256 public threshold;\r\n\r\n    mapping(address => bool) public isSigner;\r\n\r\n    struct Proposal {\r\n        address proposer;\r\n        address target;\r\n        uint256 value;\r\n        bytes data;\r\n        uint256 approvals;\r\n        bool executed;\r\n        bool cancelled;\r\n    }\r\n\r\n    Proposal[] public proposals;\r\n\r\n    mapping(uint256 => mapping(address => bool))\r\n        public approvedBy;\r\n\r\n    event ProposalCreated(\r\n        uint256 indexed proposalId,\r\n        address indexed proposer,\r\n        address target,\r\n        uint256 value\r\n    );\r\n\r\n    event ProposalApproved(\r\n        uint256 indexed proposalId,\r\n        address indexed signer\r\n    );\r\n\r\n    event ProposalExecuted(\r\n        uint256 indexed proposalId\r\n    );\r\n\r\n    event ProposalCancelled(\r\n        uint256 indexed proposalId\r\n    );\r\n\r\n    modifier onlySigner() {\r\n        require(\r\n            isSigner[msg.sender],\r\n            \"Not signer\"\r\n        );\r\n        _;\r\n    }\r\n\r\n    constructor(\r\n        address[] memory _signers,\r\n        uint256 _threshold\r\n    ) {\r\n        require(\r\n            _signers.length > 0,\r\n            \"No signers\"\r\n        );\r\n\r\n        require(\r\n            _threshold > 0 &&\r\n            _threshold <= _signers.length,\r\n            \"Invalid threshold\"\r\n        );\r\n\r\n        for (uint256 i = 0; i < _signers.length; i++) {\r\n\r\n            address signer = _signers[i];\r\n\r\n            require(\r\n                signer != address(0),\r\n                \"Zero address\"\r\n            );\r\n\r\n            require(\r\n                !isSigner[signer],\r\n                \"Duplicate signer\"\r\n            );\r\n\r\n            isSigner[signer] = true;\r\n            signers.push(signer);\r\n        }\r\n\r\n        threshold = _threshold;\r\n    }\r\n\r\n    function propose(\r\n        address target,\r\n        uint256 value,\r\n        bytes calldata data\r\n    )\r\n        external\r\n        onlySigner\r\n    {\r\n        proposals.push(\r\n            Proposal({\r\n                proposer: msg.sender,\r\n                target: target,\r\n                value: value,\r\n                data: data,\r\n                approvals: 0,\r\n                executed: false,\r\n                cancelled: false\r\n            })\r\n        );\r\n\r\n        emit ProposalCreated(\r\n            proposals.length - 1,\r\n            msg.sender,\r\n            target,\r\n            value\r\n        );\r\n    }\r\n\r\n    function approve(\r\n        uint256 proposalId\r\n    )\r\n        external\r\n        onlySigner\r\n    {\r\n        require(\r\n            proposalId < proposals.length,\r\n            \"Invalid proposal\"\r\n        );\r\n\r\n        Proposal storage proposal =\r\n            proposals[proposalId];\r\n\r\n        require(\r\n            !proposal.executed,\r\n            \"Already executed\"\r\n        );\r\n\r\n        require(\r\n            !proposal.cancelled,\r\n            \"Cancelled\"\r\n        );\r\n\r\n        require(\r\n            !approvedBy[proposalId][msg.sender],\r\n            \"Already approved\"\r\n        );\r\n\r\n        approvedBy[proposalId][msg.sender] = true;\r\n        proposal.approvals++;\r\n\r\n        emit ProposalApproved(\r\n            proposalId,\r\n            msg.sender\r\n        );\r\n    }\r\n\r\n    function execute(\r\n        uint256 proposalId\r\n    )\r\n        external\r\n        onlySigner\r\n    {\r\n        require(\r\n            proposalId < proposals.length,\r\n            \"Invalid proposal\"\r\n        );\r\n\r\n        Proposal storage proposal =\r\n            proposals[proposalId];\r\n\r\n        require(\r\n            !proposal.executed,\r\n            \"Already executed\"\r\n        );\r\n\r\n        require(\r\n            !proposal.cancelled,\r\n            \"Cancelled\"\r\n        );\r\n\r\n        require(\r\n            proposal.approvals >= threshold,\r\n            \"Not enough approvals\"\r\n        );\r\n\r\n        proposal.executed = true;\r\n\r\n        (bool success,) =\r\n            proposal.target.call{\r\n                value: proposal.value\r\n            }(proposal.data);\r\n\r\n        require(\r\n            success,\r\n            \"Execution failed\"\r\n        );\r\n\r\n        emit ProposalExecuted(\r\n            proposalId\r\n        );\r\n    }\r\n\r\n    function cancel(\r\n        uint256 proposalId\r\n    )\r\n        external\r\n    {\r\n        require(\r\n            proposalId < proposals.length,\r\n            \"Invalid proposal\"\r\n        );\r\n\r\n        Proposal storage proposal =\r\n            proposals[proposalId];\r\n\r\n        require(\r\n            msg.sender == proposal.proposer,\r\n            \"Not proposer\"\r\n        );\r\n\r\n        require(\r\n            !proposal.executed,\r\n            \"Already executed\"\r\n        );\r\n\r\n        proposal.cancelled = true;\r\n\r\n        emit ProposalCancelled(\r\n            proposalId\r\n        );\r\n    }\r\n\r\n    function getProposalCount()\r\n        external\r\n        view\r\n        returns (uint256)\r\n    {\r\n        return proposals.length;\r\n    }\r\n\r\n    receive() external payable {}\r\n}"
+      }
+    }
+  }
+}
