@@ -1,0 +1,182 @@
+:root {
+  --bg: #0b1020;
+  --surface: #151a2e;
+  --border: #2a3050;
+  --text: #e6e9f5;
+  --muted: #8892b0;
+  --accent: #5b8def;
+  --green: #4caf82;
+  --yellow: #e6a817;
+  --red: #e05c5c;
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+}
+
+.app {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 2rem 1.25rem 4rem;
+}
+
+.app-header { margin-bottom: 2rem; }
+.app-header h1 { margin: 0; font-size: 1.75rem; }
+.subtitle { color: var(--muted); margin: 0.25rem 0 0; }
+
+.topbar {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 1rem;
+}
+
+.connect-gate {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  padding: 4rem 1rem;
+}
+
+.panel {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 1.25rem 1.5rem;
+  margin-bottom: 1.25rem;
+}
+
+.panel h2 {
+  margin: 0 0 0.75rem;
+  font-size: 1.1rem;
+  color: var(--accent);
+}
+
+dl {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  column-gap: 1.25rem;
+  row-gap: 0.35rem;
+  margin: 0;
+}
+
+dt { color: var(--muted); font-size: 0.9rem; }
+dd { margin: 0; word-break: break-word; }
+
+.muted { color: var(--muted); }
+.error { color: var(--red); }
+
+/* Signer list */
+.signer-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+/* Proposals */
+.proposal-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.proposal-card {
+  background: #1b2140;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 1rem 1.25rem;
+}
+
+.proposal-header {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 0.75rem;
+}
+
+.proposal-id {
+  font-weight: 600;
+  color: var(--accent);
+}
+
+.status-badge {
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 0.15rem 0.6rem;
+  border-radius: 999px;
+}
+
+.status-pendiente { background: rgba(230, 168, 23, 0.15); color: var(--yellow); }
+.status-ejecutada { background: rgba(76, 175, 130, 0.15); color: var(--green); }
+.status-cancelada { background: rgba(224, 92, 92, 0.15); color: var(--red); }
+
+.proposal-actions {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 0.75rem;
+}
+
+/* Form */
+.proposal-form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.proposal-form label {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  font-size: 0.9rem;
+  color: var(--muted);
+}
+
+.proposal-form input {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 0.5rem 0.75rem;
+  color: var(--text);
+  font-size: 0.95rem;
+  width: 100%;
+}
+
+.proposal-form input:focus {
+  outline: 1px solid var(--accent);
+}
+
+/* Buttons */
+button {
+  background: var(--accent);
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 0.45rem 1rem;
+  font-size: 0.9rem;
+  cursor: pointer;
+  font-weight: 500;
+}
+
+button:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
+button:not(:disabled):hover {
+  filter: brightness(1.1);
+}
+
+.btn-cancel {
+  background: transparent;
+  border: 1px solid var(--red);
+  color: var(--red);
+}
