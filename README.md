@@ -52,6 +52,14 @@ npx hardhat ignition deploy ignition/modules/MultiSig.ts --network sepolia
 
 ## Correr el frontend
 
+Crear el archivo `frontend/.env.local` con el Project ID de [WalletConnect Cloud](https://cloud.walletconnect.com):
+
+```
+VITE_WALLETCONNECT_PROJECT_ID=tu_project_id_aqui
+```
+
+Luego:
+
 ```bash
 cd frontend
 npm install
