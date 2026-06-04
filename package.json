@@ -4,7 +4,7 @@
   "description": "En esta implementación se optó por un conjunto de signers fijo definido durante el despliegue del contrato.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "hardhat test"
   },
   "repository": {
     "type": "git",

@@ -29,6 +29,12 @@ Este enfoque cumple con los requisitos establecidos, que permiten utilizar un co
 npx hardhat compile
 ```
 
+## Testear
+
+```bash
+npx hardhat test
+```
+
 ## Deployar
 
 Requiere un archivo `.env` en la raíz del proyecto con estas variables:
