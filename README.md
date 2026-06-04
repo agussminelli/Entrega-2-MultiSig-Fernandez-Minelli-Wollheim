@@ -16,3 +16,48 @@ No se incluyeron funciones para agregar o remover signers después del despliegu
 * Cancelación de propuestas por parte del creador.
 
 Este enfoque cumple con los requisitos establecidos, que permiten utilizar un conjunto de signers fijo o dinámico.
+
+## Contrato deployado en Sepolia
+
+- **Dirección:** `0x6b232FA62405853382f82C5F97e3736F0ad4FeF9`
+- **Chain ID:** 11155111
+- **Threshold:** 2 de 3 signers
+
+## Compilar
+
+```bash
+npx hardhat compile
+```
+
+## Deployar
+
+Requiere un archivo `.env` en la raíz del proyecto con estas variables:
+
+```
+SEPOLIA_RPC_URL=https://sepolia.infura.io/v3/<tu-key>
+SEPOLIA_PRIVATE_KEY=0x<clave-privada>
+```
+
+Luego:
+
+```bash
+npx hardhat ignition deploy ignition/modules/MultiSig.ts --network sepolia
+```
+
+## Correr el frontend
+
+```bash
+cd frontend
+npm install
+npm run dev
+```
+
+Abre [http://localhost:5173](http://localhost:5173). Conectar MetaMask en la red Sepolia.
+
+### Flujo de uso
+
+1. Conectar wallet — la app verifica automáticamente si sos signer del contrato.
+2. **Crear propuesta:** completar el formulario con dirección destino, valor en ETH y calldata (opcional).
+3. **Aprobar:** cada signer aprueba la propuesta desde su wallet.
+4. **Ejecutar:** cuando se alcanza el threshold (2 de 3 aprobaciones), cualquier signer puede ejecutar la transacción.
+5. **Cancelar:** solo el signer que creó la propuesta puede cancelarla.
