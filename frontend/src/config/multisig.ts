@@ -1,6 +1,5 @@
 import { type Address } from 'viem';
 
-// TODO: actualizar esta dirección si se redeploya el contrato con los signers reales
 export const MULTISIG_ADDRESS: Address = '0x6b232FA62405853382f82C5F97e3736F0ad4FeF9';
 
 export const SIGNER_COUNT = 3;
