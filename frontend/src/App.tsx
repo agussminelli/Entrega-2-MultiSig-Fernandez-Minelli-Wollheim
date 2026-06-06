@@ -34,8 +34,8 @@ export default function App() {
         <ContractInfo />
         <SignerSection>
           <NewProposalForm />
-          <ProposalList />
         </SignerSection>
+        <ProposalList />
       </ConnectGate>
     </main>
   );
