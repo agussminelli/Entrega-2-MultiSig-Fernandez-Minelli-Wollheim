@@ -222,6 +222,11 @@ contract MultiSig {
             "Already executed"
         );
 
+        require(
+            !proposal.cancelled,
+            "Already cancelled"
+        );
+
         proposal.cancelled = true;
 
         emit ProposalCancelled(

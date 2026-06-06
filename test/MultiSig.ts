@@ -247,6 +247,12 @@ describe("MultiSig", function () {
       expect(proposal.cancelled).to.be.true;
     });
 
+    it("reverts si la propuesta ya está cancelada", async function () {
+      const { multisig, owner } = await conn.networkHelpers.loadFixture(withProposalFixture);
+      await multisig.connect(owner).cancel(0n);
+      await expect(multisig.connect(owner).cancel(0n)).to.be.revertedWith("Already cancelled");
+    });
+
     it("emite el evento ProposalCancelled", async function () {
       const { multisig, owner } = await conn.networkHelpers.loadFixture(withProposalFixture);
       await expect(multisig.connect(owner).cancel(0n))
