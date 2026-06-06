@@ -1,6 +1,6 @@
 # Entrega 2 — Contrato MultiSig
 
-**Taller de Tecnologías 2 · ORT Argentina**
+**Taller de Tecnologías 2 · ORT Uruguay**
 Fernandez · Minelli · Wollheim
 
 Repositorio: [github.com/agussminelli/Entrega-2-MultiSig-Fernandez-Minelli-Wollheim](https://github.com/agussminelli/Entrega-2-MultiSig-Fernandez-Minelli-Wollheim)
