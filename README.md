@@ -23,6 +23,14 @@ Este enfoque cumple con los requisitos establecidos, que permiten utilizar un co
 - **Chain ID:** 11155111
 - **Threshold:** 2 de 3 signers
 
+### Wallets signer
+
+| Integrante | Dirección |
+|---|---|
+| Federico | `0xF200f08Ff10D633B552320AEFE42779E9370f1f0` |
+| Nahuel | `0x678BE110A5C2922a035A46bA5e99e9Cce1c1FFbD` |
+| Agustina | `0xB2649c3bF3503360Af13d91fC2e675C19e792947` |
+
 ## Compilar
 
 ```bash
