@@ -41,8 +41,8 @@ No se incluyeron funciones para agregar o remover signers post-despliegue. Esta 
 | Integrante | Dirección |
 |---|---|
 | Federico Wollheim | `0xF200f08Ff10D633B552320AEFE42779E9370f1f0` |
-| Nahuel Minelli | `0x678BE110A5C2922a035A46bA5e99e9Cce1c1FFbD` |
-| Agustina Fernandez | `0xB2649c3bF3503360Af13d91fC2e675C19e792947` |
+| Nahuel Fernandez | `0x678BE110A5C2922a035A46bA5e99e9Cce1c1FFbD` |
+| Agustina Minelli | `0xB2649c3bF3503360Af13d91fC2e675C19e792947` |
 
 ---
 
